@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中华非遗体验之旅——国家级非遗工坊沉浸式体验指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C53030', // 中国红
+                        secondary: '#D69E2E', // 金色
+                        tertiary: '#4A5568', // 深灰色
+                        light: '#F7FAFC', // 浅色背景
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .transition-transform {
+                transition-property: transform;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 300ms;
+            }
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
+            .bg-pattern {
+                background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            }
+        }
+    </style>
+</head>
+<body class="bg-light font-sans text-tertiary bg-pattern">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2">
+                <i class="fa fa-university text-primary text-2xl"></i>
+                <span class="text-xl font-bold text-primary">中华非遗</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="font-medium hover:text-primary transition-colors">关于非遗</a>
+                <a href="#workshops" class="font-medium hover:text-primary transition-colors">工坊体验</a>
+                <a href="#innovation" class="font-medium hover:text-primary transition-colors">创新亮点</a>
+                <a href="#guide" class="font-medium hover:text-primary transition-colors">参与攻略</a>
+                <a href="#value" class="font-medium hover:text-primary transition-colors">体验价值</a>
+                <button id="downloadWordBtn" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center">
+                    <i class="fa fa-file-word-o mr-2"></i> 下载指南
+                </button>
+            </div>
+            <button class="md:hidden text-tertiary focus:outline-none" id="menu-toggle">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white shadow-lg absolute w-full" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#about" class="py-2 hover:text-primary transition-colors">关于非遗</a>
+                <a href="#workshops" class="py-2 hover:text-primary transition-colors">工坊体验</a>
+                <a href="#innovation" class="py-2 hover:text-primary transition-colors">创新亮点</a>
+                <a href="#guide" class="py-2 hover:text-primary transition-colors">参与攻略</a>
+                <a href="#value" class="py-2 hover:text-primary transition-colors">体验价值</a>
+                <button id="downloadWordBtnMobile" class="bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center mt-2">
+                    <i class="fa fa-file-word-o mr-2"></i> 下载指南
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://picsum.photos/id/1035/1920/1080" alt="非遗文化展示" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
+        </div>
+        <div class="container mx-auto px-4 z-10 text-center">
+            <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white mb-6 text-shadow leading-tight">
+                中华非遗·体验之旅
+            </h1>
+            <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-10 max-w-3xl mx-auto text-shadow">
+                走进国家级非遗工坊，触摸千年文脉，体验非遗魅力，让传统文化在指尖绽放新活力
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#workshops" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-all transform hover:-translate-y-1 shadow-lg">
+                    探索工坊体验
+                </a>
+                <a href="#guide" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-bold py-3 px-8 rounded-lg transition-all transform hover:-translate-y-1 border border-white/40">
+                    获取体验指南
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-white/80 hover:text-white">
+                <i class="fa fa-angle-down text-3xl"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- 关于非遗 -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4">触摸千年文脉的活态传承</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-lg text-tertiary/80">
+                    在中华大地上，非遗不再是博物馆里的静态展品，而是可触摸、可参与、可创造的生活美学
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-bold text-tertiary mb-6">非遗体验的核心价值</h3>
+                    <p class="mb-4 text-lg text-tertiary/80">
+                        当您亲手扎制一盏灯笼、雕刻一方木艺、制作一管传统手工艺作品时，千年文脉便在指尖流转。我们致力于通过沉浸式体验，让非遗技艺从传承者手中，走进每个人的生活。
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                        <div class="bg-light p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-primary text-3xl mb-4">
+                                <i class="fa fa-hand-paper-o"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">亲手参与</h4>
+                            <p class="text-tertiary/70">从选材到成品，全程体验传统工艺的魅力</p>
+                        </div>
+                        <div class="bg-light p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-primary text-3xl mb-4">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">文化认知</h4>
+                            <p class="text-tertiary/70">了解每项非遗背后的历史渊源与文化内涵</p>
+                        </div>
+                        <div class="bg-light p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-primary text-3xl mb-4">
+                                <i class="fa fa-lightbulb-o"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">创意开发</h4>
+                            <p class="text-tertiary/70">将传统技艺与现代设计结合，激发创新思维</p>
+                        </div>
+                        <div class="bg-light p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <div class="text-primary text-3xl mb-4">
+                                <i class="fa fa-shield"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">产权保护</h4>
+                            <p class="text-tertiary/70">学习知识产权知识，为创意成果提供法律保障</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 relative">
+                    <div class="relative z-10 rounded-lg overflow-hidden shadow-xl hover-scale transition-transform">
+                        <img src="https://picsum.photos/id/1040/800/600" alt="非遗体验活动" class="w-full h-auto">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-primary/10 rounded-full z-0"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-secondary/10 rounded-full z-0"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工坊体验 -->
+    <section id="workshops" class="py-20 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4">三大非遗工坊体验</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-lg text-tertiary/80">
+                    深入三大国家级非遗工坊，体验传统技艺的魅力，感受非遗与现代的碰撞
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 灯笼工坊 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover-scale transition-transform">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1047/600/400" alt="国家级灯笼彩扎工坊" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-2xl font-bold">国家级灯笼彩扎工坊</h3>
+                            <p class="text-white/80">在灯火中传承千年技艺</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">国家级非遗</span>
+                            <span class="ml-2 text-tertiary/60 text-sm"><i class="fa fa-clock-o"></i> 体验时长: 2-3小时</span>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>传统灯笼骨架扎制体验，学习经典造型构建技艺</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>灯笼彩绘创作，可融入现代元素并申请外观设计专利</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>灯笼点亮仪式，体验传统灯笼在现代光影中的独特魅力</span>
+                            </li>
+                        </ul>
+                        <a href="#guide" class="block text-center bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                            预约体验
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 木雕工坊 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover-scale transition-transform">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1059/600/400" alt="传统木雕工坊" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-2xl font-bold">传统木雕工坊</h3>
+                            <p class="text-white/80">在凿刻中对话百年匠心</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">国家级非遗</span>
+                            <span class="ml-2 text-tertiary/60 text-sm"><i class="fa fa-clock-o"></i> 体验时长: 3-4小时</span>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>珍贵木料辨识体验，学习辨别不同种类木料特性</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>生肖木雕微创作，掌握"三刻三磨"传统技法</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>传统木雕纹样学习，了解经典图案的文化内涵与著作权保护</span>
+                            </li>
+                        </ul>
+                        <a href="#guide" class="block text-center bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                            预约体验
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 手工艺工坊 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover-scale transition-transform">
+                    <div class="relative h-64">
+                        <img src="https://picsum.photos/id/1067/600/400" alt="传统手工艺工坊" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <h3 class="text-2xl font-bold">传统手工艺工坊</h3>
+                            <p class="text-white/80">在指尖传承东方智慧</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">国家级非遗</span>
+                            <span class="ml-2 text-tertiary/60 text-sm"><i class="fa fa-clock-o"></i> 体验时长: 2-3小时</span>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>传统手工艺材料研学，了解各类天然材料的特性与采集标准</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>古法工艺制作体验，对比传统手工与现代机器制作的差异</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                <span>个人作品创作与展示，定制具有个人风格的传统手工艺品</span>
+                            </li>
+                        </ul>
+                        <a href="#guide" class="block text-center bg-primary hover:bg-primary/90 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                            预约体验
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 创新亮点 -->
+    <section id="innovation" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4">多维融合驱动非遗焕新</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-lg text-tertiary/80">
+                    我们通过创新体验模式，让非遗技艺在现代社会焕发新的生命力
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-20">
+                <div>
+                    <div class="relative">
+                        <div class="relative z-10 rounded-lg overflow-hidden shadow-xl hover-scale transition-transform">
+                            <img src="https://picsum.photos/id/1073/800/600" alt="非遗+科技体验" class="w-full h-auto">
+                        </div>
+                        <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-primary/10 rounded-full z-0"></div>
+                        <div class="absolute -top-8 -right-8 w-32 h-32 bg-secondary/10 rounded-full z-0"></div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-tertiary mb-6">非遗 + 科技创新体验</h3>
+                    <p class="mb-6 text-lg text-tertiary/80">
+                        我们将传统非遗技艺与现代科技深度融合，打造沉浸式、互动式的非遗体验，让传统文化以全新的方式呈现。
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-cube text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">AR非遗秀</h4>
+                                <p class="text-tertiary/70">扫描亲手制作的非遗作品，通过APP观看3D虚拟展示，支持视频录制分享，让非遗作品"活"起来。</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-scanner text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">数字非遗档案馆</h4>
+                                <p class="text-tertiary/70">作品扫描生成数字模型，上传国家级非遗数字档案馆，实现"实体作品 + 数字版权"双重保护。</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-smell text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">非遗技艺数据库</h4>
+                                <p class="text-tertiary/70">通过智能终端，查询传统技艺的历史渊源与演变，对比不同流派的技艺特点。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-tertiary mb-6">知识产权赋能商业转化</h3>
+                    <p class="mb-6 text-lg text-tertiary/80">
+                        我们将知识产权保护融入非遗体验全流程，帮助体验者将创意转化为受法律保护的商业价值，构建非遗传承的可持续生态。
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-paint-brush text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">文创开发全链条支持</h4>
+                                <p class="text-tertiary/70">体验者可授权作品参与文创设计，工坊提供商标注册指导，构建"体验 - 创意 - 商业"闭环，让非遗成果转化为市场商品。</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-primary/10 p-3 rounded-full mr-4">
+                                <i class="fa fa-certificate text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">非遗体验认证体系</h4>
+                                <p class="text-tertiary/70">完成体验并考核者可申请"国家级非遗体验官"认证，作品纳入国家非遗保护池享受法律维权支持。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="relative">
+                        <div class="relative z-10 rounded-lg overflow-hidden shadow-xl hover-scale transition-transform">
+                            <img src="https://picsum.photos/id/1080/800/600" alt="知识产权赋能" class="w-full h-auto">
+                        </div>
+                        <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-primary/10 rounded-full z-0"></div>
+                        <div class="absolute -top-8 -left-8 w-32 h-32 bg-secondary/10 rounded-full z-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 参与攻略 -->
+    <section id="guide" class="py-20 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4">非遗体验全攻略</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-lg text-tertiary/80">
+                    从预约到体验，从成果保护到商业转化，我们为您提供全方位的指南
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg hover-scale transition-transform">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fa fa-calendar text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">预约系统</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>线上平台："中华非遗"官方网站与微信公众号，支持套餐或单项预约</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>定制服务：企业团建、研学旅行可预约"非遗 + 知识产权"主题体验</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>公益体验：每月首周开放青少年免费名额，需提交创意参与方案</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg hover-scale transition-transform">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fa fa-copyright text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">成果转化</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>作品保护：免费知识产权咨询，支持著作权登记与外观设计专利申请</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>商业孵化：优秀创意进入"非遗创新孵化器"，获设计、生产、销售全链条支持</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>成功案例：多项非遗体验作品已进入国家级文创产品销售体系</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg hover-scale transition-transform">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fa fa-shopping-bag text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">衍生品购买</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>线下商店：全国连锁"中华非遗"文创店，销售带知识产权标识的非遗产品</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>线上平台：扫码进入官方商城，购买定制个性化非遗产品，支持全球配送</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>特色商品：非遗传承人联名款、限量版手工艺品、数字非遗藏品</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 bg-white rounded-xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-center mb-8">体验流程</h3>
+                <div class="relative">
+                    <!-- 连接线 -->
+                    <div class="absolute top-8 left-0 right-0 h-1 bg-primary/20 -z-10"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <span class="text-white font-bold text-xl">1</span>
+                            </div>
+                            <h4 class="font-bold mb-2">在线预约</h4>
+                            <p class="text-sm text-tertiary/70">选择日期与工坊</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <span class="text-white font-bold text-xl">2</span>
+                            </div>
+                            <h4 class="font-bold mb-2">工坊签到</h4>
+                            <p class="text-sm text-tertiary/70">领取体验材料</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <span class="text-white font-bold text-xl">3</span>
+                            </div>
+                            <h4 class="font-bold mb-2">技艺学习</h4>
+                            <p class="text-sm text-tertiary/70">传承人全程指导</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <span class="text-white font-bold text-xl">4</span>
+                            </div>
+                            <h4 class="font-bold mb-2">作品创作</h4>
+                            <p class="text-sm text-tertiary/70">融入个人创意</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4 mx-auto">
+                                <span class="text-white font-bold text-xl">5</span>
+                            </div>
+                            <h4 class="font-bold mb-2">成果认证</h4>
+                            <p class="text-sm text-tertiary/70">可申请产权保护</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 体验价值 -->
+    <section id="value" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4">从参与者到传承者</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-lg text-tertiary/80">
+                    每一次非遗体验，都是对千年文脉的当代回应
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-lg text-tertiary/80 mb-6">
+                        当您手握扎制的灯笼、雕刻的木雕、制作的手工艺品走出工坊，带走的不仅是手工艺品，更是非遗保护的鲜活认知——知识产权是守护匠心的铠甲，非遗传承是创新的延续。
+                    </p>
+                    <p class="text-lg text-tertiary/80 mb-6">
+                        我们的非遗体验以"技艺实践 - 文化认知 - 法律保护"三维设计，让每个人成为非遗参与者、创新者、守护者。每一次敲击、每一道纹路、每一种色彩，都是对千年文脉的当代回应。
+                    </p>
+                    <div class="bg-light p-6 rounded-lg mb-6">
+                        <h4 class="font-bold text-xl mb-4 flex items-center">
+                            <i class="fa fa-quote-left text-primary mr-2"></i>
+                            体验寄语
+                        </h4>
+                        <p class="text-tertiary/80 italic">
+                            "在快节奏的现代生活中，非遗体验让我重新找回了对传统手工艺的敬畏与热爱。更令人惊喜的是，我的创意作品竟然可以通过正规渠道申请专利保护，这让我感受到非遗传承不仅是怀旧，更是创新的源泉。"
+                        </p>
+                    </div>
+                </div>
+                <
